@@ -1,0 +1,71 @@
+
+Estructura de la tabla: C:\DOCUME~1\ESTUARDO\CONFIG~1\TEMP\EM5G00E0.TMP
+Nº registros de datos:  520     
+Última actualización:     /  /  
+Página de códigos:      1252    
+Campo  Nombre de campo Tipo                Ancho    Dec   Índice   OrdenaciónNulos
+    1  REC_NUMREC      Entero                  4                             No
+    2  REC_TPOREC      Entero                  4                             No
+    3  REC_FCHREC      Fecha                   8                             Sí
+    4  REC_CODAGE      Entero                  4                             Sí
+    5  REC_CODCLI      Entero                  4                             Sí
+    6  REC_CODPRD      Entero                  4                             Sí
+    7  REC_REGFCA      Entero                  4                             Sí
+    8  REC_AGEENV      Entero                  4                             Sí
+    9  REC_TRANSP      Carácter               20                             Sí
+   10  REC_HRAENT      Carácter                8                             Sí
+   11  REC_CLSCAF      Entero                  4                             Sí
+   12  REC_TPOCAF      Entero                  4                             Sí
+   13  REC_CODSAL      Carácter                1                             Sí
+   14  REC_CODTAR      Entero                  4                             Sí
+   15  REC_CAMINI      Entero                  4                             Sí
+   16  REC_CAMFIN      Entero                  4                             Sí
+   17  REC_PESOBR      Numérico               20      2                      Sí
+   18  REC_PESONT      Numérico               20      2                      Sí
+   19  REC_CNTSAC      Numérico               12                             Sí
+   20  REC_CTCOSI      Entero                  4                             Sí
+   21  REC_CTTPOI      Entero                  4                             Sí
+   22  REC_CTTSTI      Entero                  4                             Sí
+   23  REC_CTTAZI      Entero                  4                             Sí
+   24  REC_CTOROI      Entero                  4                             Sí
+   25  REC_TPOSEI      Entero                  4                             Sí
+   26  REC_CATADI      Carácter                1                             Sí
+   27  REC_OLIVEI      Carácter                1                             Sí
+   28  REC_ESCOGI      Carácter                1                             Sí
+   29  REC_CTCOSF      Entero                  4                             Sí
+   30  REC_CTTPOF      Entero                  4                             Sí
+   31  REC_CTTSTF      Entero                  4                             Sí
+   32  REC_CTTAZF      Entero                  4                             Sí
+   33  REC_CTOROF      Entero                  4                             Sí
+   34  REC_TPOSEF      Entero                  4                             Sí
+   35  REC_CATADF      Carácter                1                             Sí
+   36  REC_OLIVEF      Carácter                1                             Sí
+   37  REC_ESCOGF      Carácter                1                             Sí
+   38  REC_SALPES      Numérico               20      2                      Sí
+   39  REC_SALLIQ      Numérico               20      2                      Sí
+   40  REC_REQUERID..  Numérico               20      2                      Sí
+   41  REC_TARSAC      Numérico               20      2                      Sí
+   42  REC_SALSAC      Numérico               20      2                      Sí
+   43  REC_STSREC      Carácter                1                             Sí
+   44  REC_FCHSIS      Fecha                   8                             Sí
+   45  REC_HRASIS      Carácter                8                             Sí
+   46  REC_FIRMA       Carácter               10                             Sí
+   47  REC_CODANT      Doble                   8      2                      Sí
+   48  REC_SALINT      Numérico               20      2                      Sí
+   49  REC_COMENT      Carácter              100                             Sí
+   50  REC_FLGUPD      Carácter                1                             Sí
+   51  REC_FLGBAS      Lógico                  1                             No
+   52  REC_PESINI      Numérico               20      2                      Sí
+   53  REC_PESFIN      Numérico               20      2                      Sí
+   54  REC_SALSOL      Numérico               20      2                      Sí
+   55  REC_PAGADO      Carácter                1                             Sí
+   56  REC_ACUMULAD..  Numérico               17      2                      Sí
+   57  REC_USRADD      Carácter               10                             Sí
+   58  REC_FCHADD      Fecha                   8                             Sí
+   59  REC_HRAADD      Carácter                8                             Sí
+   60  REC_USRUPD      Carácter               10                             Sí
+   61  REC_FCHUPD      Fecha                   8                             Sí
+   62  REC_HRAUPD      Carácter                8                             Sí
+   63  REC_UPDATE      Lógico                  1                             No
+   64  REC_IMPRESO     Lógico                  1                             No
+** Total **                                  589

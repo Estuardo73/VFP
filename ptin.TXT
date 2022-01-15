@@ -1,0 +1,20 @@
+
+Estructura de la tabla: C:\TEMP\UBICACIONES.DBF
+Nº registros de datos:  790     
+Última actualización:   21/05/2002
+Página de códigos:      1252    
+Campo  Nombre de campo Tipo                Ancho    Dec   Índice   OrdenaciónNulos
+    1  DOCTO           Carácter                8                             No
+    2  LINEA           Numérico                1                             No
+    3  DOCUMENTO       Entero                  4                             No
+    4  TIPO            Entero                  4                             No
+    5  DOCUMENTOC      Carácter                6                             No
+    6  FECHA           Fecha                   8                             No
+    7  FECHAC          Carácter               10                             No
+    8  CALIDAD         Carácter               61                             Sí
+    9  UBICACIONI      Carácter               11                             Sí
+   10  QUINTALESC      Carácter               10                             Sí
+   11  QUINTALES       Monetario               8      4                      Sí
+   12  UBICACIONF      Carácter               10                             Sí
+   13  QUINTALES2      Carácter               10                             Sí
+** Total **                                  153

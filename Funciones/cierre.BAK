@@ -1,0 +1,27 @@
+If objAmbiente.NumeroError = 0
+	lnRespuesta = MessageBox( "¿Está seguro de cerrar el sistema?", 4+32+256, "Confirme" )
+Else
+	lnRespuesta = 6
+EndIf
+If lnRespuesta = 6
+	On Shutdown
+	On Error llError = .t.
+	Dimension laForma(10)
+	laForma = ""
+	lnForma = 0
+	For lnCuenta = 1 To _Screen.FormCount
+		With _Screen.Forms(lnCuenta)
+			.Show
+			.Release
+		EndWith
+	EndFor
+*   Cierra y Borra la conección a SQL
+*   -----------------	
+    SQLDISCONNECT(objAmbiente.Coneccion)
+    DELETE CONNECTION cafe
+*   ----------------- 
+	Inkey(0.1, "H")
+	Clear Events
+	
+	
+EndIf

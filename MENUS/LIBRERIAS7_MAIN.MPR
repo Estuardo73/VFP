@@ -1,0 +1,337 @@
+*       *********************************************************
+*       *                                                         
+*       * 28/05/2002        LIBRERIAS7_MAIN.MPR         09:19:25  
+*       *                                                         
+*       *********************************************************
+*       *                                                         
+*       * Nombre del autor                                        
+*       *                                                         
+*       * Copyright (C) 2002 Nombre de la organización            
+*       * Dirección                                               
+*       * Ciudad,     Código pos                                  
+*       * País                                              
+*       *                                                         
+*       * Descripción:                                            
+*       * Este programa se generó automáticamente por GENMENU.    
+*       *                                                         
+*       *********************************************************
+
+
+*       *********************************************************
+*       *                                                         
+*       *                     Establecer código                   
+*       *                                                         
+*       *********************************************************
+*
+
+* This file is a generated, framework-enabling component
+* created by APPBUILDER
+* (c) Microsoft Corporation
+
+
+#INCLUDE [..\LIBRERIAS7_APP.H]
+
+
+
+*       *********************************************************
+*       *                                                         
+*       *                    Definición de menú                   
+*       *                                                         
+*       *********************************************************
+*
+
+SET SYSMENU TO
+SET SYSMENU AUTOMATIC
+
+DEFINE PAD _msm_file OF _MSYSMENU PROMPT "\<Archivo" COLOR SCHEME 3 ;
+	NEGOTIATE  LEFT, NONE ;
+	KEY ALT+A, "" ;
+	MESSAGE "Crea, abre, guarda, imprime archivos o sale "+APP_GLOBAL.cCaption+""
+DEFINE PAD _msm_edit OF _MSYSMENU PROMPT "\<Modificar" COLOR SCHEME 3 ;
+	KEY ALT+M, "" ;
+	MESSAGE "Modifica texto o la selección actual"
+DEFINE PAD _msm_tools OF _MSYSMENU PROMPT "\<Herramientas" COLOR SCHEME 3 ;
+	KEY ALT+H, ""
+DEFINE PAD _msm_prog OF _MSYSMENU PROMPT "\<Programa" COLOR SCHEME 3 ;
+	NEGOTIATE  MIDDLE, NONE ;
+	KEY ALT+P, "" ;
+	MESSAGE "Ejecuta, depura, compila y suspende programas"
+DEFINE PAD _msm_fave OF _MSYSMENU PROMPT "F\<avoritos" COLOR SCHEME 3 ;
+	KEY ALT+A, "Alt+A" ;
+	MESSAGE "Acceso fácil a documentos favoritos"
+DEFINE PAD _msm_windo OF _MSYSMENU PROMPT "\<Ventana" COLOR SCHEME 3 ;
+	NEGOTIATE  RIGHT, NONE ;
+	KEY ALT+V, ""
+DEFINE PAD _msm_systm OF _MSYSMENU PROMPT "Ay\<uda" COLOR SCHEME 3 ;
+	KEY ALT+U, ""
+ON PAD _msm_file OF _MSYSMENU ACTIVATE POPUP _mfile
+ON PAD _msm_edit OF _MSYSMENU ACTIVATE POPUP _medit
+ON PAD _msm_tools OF _MSYSMENU ACTIVATE POPUP _mtools
+ON PAD _msm_prog OF _MSYSMENU ACTIVATE POPUP _mprog
+ON PAD _msm_fave OF _MSYSMENU ACTIVATE POPUP _mfave
+ON PAD _msm_windo OF _MSYSMENU ACTIVATE POPUP _mwindow
+ON PAD _msm_systm OF _MSYSMENU ACTIVATE POPUP _msystem
+
+DEFINE POPUP _mfile MARGIN RELATIVE SHADOW COLOR SCHEME 4
+DEFINE BAR 1 OF _mfile PROMPT "\<Nuevo..." ;
+	MESSAGE "Crea un documento"
+DEFINE BAR 2 OF _mfile PROMPT "\<Abrir..." ;
+	MESSAGE "Abre un documento"
+DEFINE BAR 3 OF _mfile PROMPT "\<Cerrar" ;
+	SKIP FOR TYPE("_SCREEN.Activeform") # "O" OR _SCREEN.ActiveForm.ShowWindow = 2 ;
+	MESSAGE "Cierra el formulario activo"
+DEFINE BAR 4 OF _mfile PROMPT "\-"
+DEFINE BAR 5 OF _mfile PROMPT "\<Guardar" ;
+	SKIP FOR EMPTY(AUSED(latemp)) ;
+	MESSAGE "Guarda la modificación en el formulario o conjunto de formularios actual"
+DEFINE BAR 6 OF _mfile PROMPT "Re\<vertir" ;
+	SKIP FOR EMPTY(AUSED(latemp)) ;
+	MESSAGE "Deshace la modificación en el formulario o conjunto de formularios actual"
+DEFINE BAR 7 OF _mfile PROMPT "\-"
+DEFINE BAR 8 OF _mfile PROMPT "I\<mprimir..." ;
+	SKIP FOR EMPTY(AUSED(latemp)) ;
+	MESSAGE "Imprime los datos actuales"
+DEFINE BAR 9 OF _mfile PROMPT "Im\<primir informes..." ;
+	MESSAGE "Selecciona un informe"
+DEFINE BAR 10 OF _mfile PROMPT "Conf\<igurar impresión..."
+DEFINE BAR 11 OF _mfile PROMPT "\-"
+DEFINE BAR 12 OF _mfile PROMPT "\<Tutorial..." ;
+	MESSAGE "Selecciona un formulario o documento de informe para ejecutarlo"
+DEFINE BAR 13 OF _mfile PROMPT "Inicio de sesión de \<usuario..." ;
+	MESSAGE "Inicie una sesión como un usuario diferente"
+DEFINE BAR 14 OF _mfile PROMPT "\-"
+DEFINE BAR 15 OF _mfile PROMPT "\<Salir" ;
+	MESSAGE "Salir "+APP_GLOBAL.cCaption+""
+ON SELECTION BAR 1 OF _mfile APP_GLOBAL.DoNewOpen(.T.)
+ON SELECTION BAR 2 OF _mfile APP_GLOBAL.DoNewOpen()
+ON SELECTION BAR 3 OF _mfile IIF(APP_GLOBAL.QueryDataSessionUnload(),APP_GLOBAL.ReleaseForm(),.T.)
+ON SELECTION BAR 5 OF _mfile APP_GLOBAL.DataUpdate()
+ON SELECTION BAR 6 OF _mfile APP_GLOBAL.DataRevert()
+ON SELECTION BAR 8 OF _mfile APP_GLOBAL.DoTableOutput()
+ON SELECTION BAR 9 OF _mfile APP_GLOBAL.DoReportDialog()
+ON SELECTION BAR 10 OF _mfile SET PRINTER TO NAME (SYS(1037))
+ON SELECTION BAR 12 OF _mfile APP_GLOBAL.DoStartupForm()
+ON SELECTION BAR 13 OF _mfile IIF(APP_GLOBAL.ReleaseForms(),IIF(APP_GLOBAL.SetCurrentUser(.T.),.T., APP_GLOBAL.Release()),.T.)
+ON SELECTION BAR 15 OF _mfile APP_GLOBAL.Release()
+
+DEFINE POPUP _medit MARGIN RELATIVE SHADOW COLOR SCHEME 4
+DEFINE BAR _med_undo OF _medit PROMPT "\<Deshacer" ;
+	KEY CTRL+Z, "Ctrl+Z" ;
+	MESSAGE "Deshace el último comando o acción"
+DEFINE BAR _med_redo OF _medit PROMPT "Re\<hacer" ;
+	KEY CTRL+R, "Ctrl+R" ;
+	MESSAGE "Repite el último comando o la última acción"
+DEFINE BAR _med_sp100 OF _medit PROMPT "\-"
+DEFINE BAR _med_cut OF _medit PROMPT "Co\<rtar" ;
+	KEY CTRL+X, "Ctrl+X" ;
+	MESSAGE "Quita la selección y la coloca en el Portapapeles"
+DEFINE BAR _med_copy OF _medit PROMPT "\<Copiar" ;
+	KEY CTRL+C, "Ctrl+C" ;
+	MESSAGE "Copia la selección en el Portapapeles"
+DEFINE BAR _med_paste OF _medit PROMPT "\<Pegar" ;
+	KEY CTRL+V, "Ctrl+V" ;
+	MESSAGE "Pega el contenido del Portapapeles"
+DEFINE BAR _med_clear OF _medit PROMPT "\<Borrar" ;
+	MESSAGE "Quita la selección y no la coloca en el Portapapeles"
+DEFINE BAR _med_sp200 OF _medit PROMPT "\-"
+DEFINE BAR _med_slcta OF _medit PROMPT "Se\<leccionar todo" ;
+	KEY CTRL+A, "Ctrl+A" ;
+	MESSAGE "Selecciona todo el texto o todos los elementos de la ventana actual"
+DEFINE BAR _med_sp300 OF _medit PROMPT "\-"
+DEFINE BAR _med_find OF _medit PROMPT "\<Buscar..." ;
+	KEY CTRL+F, "Ctrl+F" ;
+	MESSAGE "Busca el texto especificado"
+DEFINE BAR _med_finda OF _medit PROMPT "Buscar siguie\<nte" ;
+	KEY CTRL+G, "Ctrl+G" ;
+	MESSAGE "Repite la última búsqueda"
+DEFINE BAR _med_repl OF _medit PROMPT "R\<eemplazar..." ;
+	KEY CTRL+L, "Ctrl+L" ;
+	MESSAGE "Reemplaza el texto especificado con otro texto diferente"
+
+DEFINE POPUP _mtools MARGIN RELATIVE SHADOW COLOR SCHEME 4
+DEFINE BAR 1 OF _mtools PROMPT "M\<acros..." ;
+	MESSAGE "Crea, elimina o revisa una macro de teclado"
+DEFINE BAR 2 OF _mtools PROMPT "Registros de \<errores"
+DEFINE BAR 3 OF _mtools PROMPT "\-"
+DEFINE BAR 4 OF _mtools PROMPT "\<Opciones..."
+DEFINE BAR 5 OF _mtools PROMPT "\<Cambiar contraseña..."
+ON BAR 1 OF _mtools ACTIVATE POPUP _mmacros
+ON BAR 2 OF _mtools ACTIVATE POPUP _merrorlog
+ON SELECTION BAR 4 OF _mtools APP_GLOBAL.DoOptionsDialog()
+ON SELECTION BAR 5 OF _mtools APP_GLOBAL.DoChangePassword()
+
+DEFINE POPUP _mmacros MARGIN RELATIVE SHADOW COLOR SCHEME 4
+DEFINE BAR 1 OF _mmacros PROMPT "\<Grabar una macro"
+DEFINE BAR 2 OF _mmacros PROMPT "\<Borrar macros"
+DEFINE BAR 3 OF _mmacros PROMPT "\<Guardar macros como predeterminadas"
+DEFINE BAR 4 OF _mmacros PROMPT "Restaurar macros pre\<determinadas"
+ON SELECTION BAR 1 OF _mmacros KEYBOARD ("{"+SET("MACKEY")+"}")
+ON SELECTION BAR 2 OF _mmacros CLEAR MACROS
+ON SELECTION BAR 3 OF _mmacros APP_GLOBAL.SetMacros(.T.)
+ON SELECTION BAR 4 OF _mmacros APP_GLOBAL.SetMacros()
+
+DEFINE POPUP _merrorlog MARGIN RELATIVE SHADOW COLOR SCHEME 4
+DEFINE BAR 1 OF _merrorlog PROMPT "Mostrar registro \<de errores"
+DEFINE BAR 2 OF _merrorlog PROMPT "\<Exportar registro"
+DEFINE BAR 3 OF _merrorlog PROMPT "\<Purgar registro"
+ON SELECTION BAR 1 OF _merrorlog APP_GLOBAL.DisplayErrorLog()
+ON SELECTION BAR 2 OF _merrorlog APP_GLOBAL.ExportErrorLog()
+ON SELECTION BAR 3 OF _merrorlog APP_GLOBAL.PurgeErrorLog()
+
+DEFINE POPUP _mprog MARGIN RELATIVE SHADOW COLOR SCHEME 4
+DEFINE BAR _mpr_do OF _mprog PROMPT "\<Ejecutar..." ;
+	MESSAGE "Ejecuta un programa, aplicación, formulario, informe, consulta o menú"
+DEFINE BAR _mpr_cancl OF _mprog PROMPT "\<Cancelar" ;
+	MESSAGE "Detiene la ejecución del programa actual"
+DEFINE BAR _mpr_resum OF _mprog PROMPT "\<Reanudar" ;
+	MESSAGE "Reanuda la ejecución del programa suspendido actualmente"
+DEFINE BAR _mpr_suspend OF _mprog PROMPT "\<Suspender" ;
+	MESSAGE "Suspende el programa que hay actualmente en ejecución"
+DEFINE BAR _mpr_compl OF _mprog PROMPT "C\<ompilar..." ;
+	MESSAGE "Compila el programa actual o el programa seleccionado"
+DEFINE BAR 6 OF _mprog PROMPT "\-"
+DEFINE BAR 7 OF _mprog PROMPT "\<Depurador"
+DEFINE BAR 8 OF _mprog PROMPT "\<Sesión de datos"
+DEFINE BAR 9 OF _mprog PROMPT "Ventana Co\<mandos"
+DEFINE BAR 10 OF _mprog PROMPT "\-"
+DEFINE BAR _mtl_browser OF _mprog PROMPT "E\<xaminador de clases" ;
+	MESSAGE "Ejecuta el Examinador de clases"
+ON SELECTION BAR 7 OF _mprog DEBUG
+ON SELECTION BAR 8 OF _mprog APP_GLOBAL.ActivateSystemWindow("View")
+ON SELECTION BAR 9 OF _mprog APP_GLOBAL.ActivateSystemWindow("Command")
+
+DEFINE POPUP _mfave MARGIN RELATIVE SHADOW COLOR SCHEME 4
+DEFINE BAR 1 OF _mfave PROMPT "\<Agregar a Favoritos..." ;
+	MESSAGE "Agrega al menú Favoritos"
+DEFINE BAR 2 OF _mfave PROMPT "\<Borrar Favoritos" ;
+	MESSAGE "Borrar lista de Favoritos"
+DEFINE BAR 3 OF _mfave PROMPT "\-"
+ON SELECTION BAR 1 OF _mfave APP_GLOBAL.DoStartupForm(.T.)
+ON SELECTION BAR 2 OF _mfave APP_GLOBAL.ClearFavorites()
+
+DEFINE POPUP _mwindow MARGIN RELATIVE SHADOW COLOR SCHEME 4
+DEFINE BAR 1 OF _mwindow PROMPT "\<Cascada"
+DEFINE BAR _mwi_arran OF _mwindow PROMPT "\<Organizar todas" ;
+	MESSAGE "Organiza las ventanas como mosaicos que no se solapan"
+DEFINE BAR _mwi_rotat OF _mwindow PROMPT "C\<iclo" ;
+	KEY CTRL+F1, "Ctrl+F1"
+ON SELECTION BAR 1 OF _mwindow APP_GLOBAL.CascadeAll()
+
+DEFINE POPUP _msystem MARGIN RELATIVE SHADOW COLOR SCHEME 4
+DEFINE BAR 1 OF _msystem PROMPT "Ay\<uda" ;
+	KEY F1, "F1"
+DEFINE BAR 2 OF _msystem PROMPT "\-"
+DEFINE BAR 3 OF _msystem PROMPT "\<Acerca de "+APP_GLOBAL.cCaption+"..."
+ON SELECTION BAR 1 OF _msystem APP_GLOBAL.DoHelp()
+ON SELECTION BAR 3 OF _msystem APP_GLOBAL.DoAboutBox()
+
+ON SELECTION POPUP _mfile MESSAGEBOX(APP_FEATURE_NOT_AVAILABLE_LOC,0,APP_GLOBAL.cCaption)
+ON SELECTION POPUP _mtools MESSAGEBOX(APP_FEATURE_NOT_AVAILABLE_LOC,0,APP_GLOBAL.cCaption)
+ON SELECTION POPUP _merrorlog MESSAGEBOX(APP_FEATURE_NOT_AVAILABLE_LOC,0,APP_GLOBAL.cCaption)
+ON SELECTION POPUP _mprog MESSAGEBOX(APP_FEATURE_NOT_AVAILABLE_LOC,0,APP_GLOBAL.cCaption)
+ON SELECTION POPUP _mfave MESSAGEBOX(APP_FEATURE_NOT_AVAILABLE_LOC,0,APP_GLOBAL.cCaption)
+ON SELECTION POPUP _mwindow MESSAGEBOX(APP_FEATURE_NOT_AVAILABLE_LOC,0,APP_GLOBAL.cCaption)
+ON SELECTION POPUP _msystem MESSAGEBOX(APP_FEATURE_NOT_AVAILABLE_LOC,0,APP_GLOBAL.cCaption)
+
+*       *********************************************************
+*       *                                                         
+*       *              Limpiar código y procedimientos            
+*       *                                                         
+*       *********************************************************
+*
+
+*  none of these statements will work
+* in exactly this way in a Top menu --
+* we'll use the array elements
+
+IF VERSION(2) = 0
+   RELEASE PAD _msm_prog OF _MSYSMENU
+   RELEASE POPUP _mprog EXTENDED
+ENDIF
+
+* the program pad items, above, always get
+* get released in runtime, but some items
+* specific to application state may be
+* released or disabled as you choose:
+IF NOT APP_GLOBAL.lReleaseUnusedMenuItems
+
+  IF EMPTY(APP_GLOBAL.cHelpFile)
+     SET SKIP OF BAR 1 OF _msystem .T.
+  ENDIF
+
+  IF EMPTY(APP_GLOBAL.cOptionsDialogClass)
+     SET SKIP OF BAR 4 OF _mtools .T.
+  ENDIF
+
+  IF EMPTY(APP_GLOBAL.cAboutBoxClass)
+     SET SKIP OF BAR 3 OF _msystem .T.
+  ENDIF
+
+  IF EMPTY(APP_GLOBAL.cStartupFormClass) ;
+     OR NOT (APP_GLOBAL.lStartupForm)
+
+     SET SKIP OF BAR 12 OF _mfile .T.
+  ENDIF
+
+  IF NOT APP_GLOBAL.lUserPreferences
+     SET SKIP OF BAR 13 OF _mfile .T.
+     SET SKIP OF BAR 5 OF _mtools .T.
+  ENDIF
+
+
+ELSE
+
+  * if you prefer
+
+  IF EMPTY(APP_GLOBAL.cOptionsDialogClass)
+     RELEASE BAR 4 OF _mtools
+  ENDIF
+
+  IF EMPTY(APP_GLOBAL.cAboutBoxClass)
+     RELEASE BAR 3 OF _msystem
+  ENDIF
+
+  IF EMPTY(APP_GLOBAL.cHelpFile)
+     RELEASE BAR 1 OF _msystem
+     RELEASE BAR 2 OF _msystem
+  ENDIF
+
+  IF NOT APP_GLOBAL.lUserPreferences
+     RELEASE BAR 13 OF _mfile
+     RELEASE BAR 14 OF _mfile
+     RELEASE BAR 5 OF _mtools
+  ENDIF
+
+  IF EMPTY(APP_GLOBAL.cStartupFormClass) ;
+     OR NOT (APP_GLOBAL.lStartupForm)
+
+     RELEASE BAR 12 OF _mfile
+  ENDIF
+
+
+ENDIF
+
+IF (NOT APP_GLOBAL.lReadEvents)
+   * unlikely for a Replace-style menu unless
+   * Top Form, but the following
+   * isn't safe in a non-ReadEvents environment
+   RELEASE BAR 1 OF _mTools
+   RELEASE POPUP _mMacros
+ELSE
+   APP_GLOBAL.cMacroPopupName = "_mMacros"
+   APP_GLOBAL.SetMacros() && refresh to appropriately disable bar
+   IF EMPTY(SET("MACKEY"))
+      RELEASE BAR 1 OF _mMacros
+   ENDIF
+ENDIF
+
+
+IF (NOT APP_GLOBAL.lFavorites)
+  RELEASE PAD _msm_Fave OF _MSYSMENU
+  RELEASE POPUP _mfave EXTENDED
+  ACTI MENU _MSYSMENU NOWAIT
+ELSE
+  APP_GLOBAL.cFavoritePopupName = "_mFave"
+  APP_GLOBAL.RefreshFavoritePopup()
+ENDIF
+

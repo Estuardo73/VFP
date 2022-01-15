@@ -1,0 +1,6 @@
+Select a.*,b.prd_nombre;
+from c:\temp\reclamos a,k:\cafe\cafe2002\ccf04 b;
+where a.ant_codprd = b.prd_codigo;
+order by a.ant_codprd;
+into table c:\temp\xreclamos
+

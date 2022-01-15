@@ -1,0 +1,53 @@
+	Function NombreMes
+		Parameters pnNumeroMes
+		lcValor = ""
+		Do Case
+			Case pnNumeroMes = 1
+				lcValor = "enero"
+			Case pnNumeroMes = 2
+				lcValor = "febrero"
+			Case pnNumeroMes = 3
+				lcValor = "marzo"
+			Case pnNumeroMes = 4
+				lcValor = "abril"
+			Case pnNumeroMes = 5
+				lcValor = "mayo"
+			Case pnNumeroMes = 6
+				lcValor = "junio"
+			Case pnNumeroMes = 7
+				lcValor = "julio"
+			Case pnNumeroMes = 8
+				lcValor = "agosto"
+			Case pnNumeroMes = 9
+				lcValor = "septiembre"
+			Case pnNumeroMes = 10
+				lcValor = "octubre"
+			Case pnNumeroMes = 11
+				lcValor = "noviembre"
+			Case pnNumeroMes = 12
+				lcValor = "diciembre"
+		EndCase
+		Return lcValor
+	EndFunc
+
+
+*----------------------------
+FUNCTION PC_USER(tn)
+*----------------------------
+* Retorna en nombre de la PC o el nombre del usuario
+* Parametros: tn = 1 - Retorna el nombre de PC
+*             tn = 2 - Retorna el nombre de usuario
+*----------------------------
+LOCAL lc, ln
+  lc = SYS(0)
+  ln = AT('#',lc)
+  tn = IIF(EMPTY(tn) or type('tn')#'N',1,tn)
+  IF tn = 1
+    lc = LEFT(lc,ln-1)
+  ELSE
+    lc = SUBS(lc,ln+2)
+  ENDIF
+
+  RETURN lc
+ENDFUNC
+*----------------------------
